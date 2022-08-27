@@ -3,6 +3,7 @@ package kazak.kirill.temperature
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
@@ -11,7 +12,6 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     private lateinit var vb: ActivityMainBinding
-    private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,17 +40,18 @@ class MainActivity : AppCompatActivity() {
     private fun getLocation(callback: (String) -> Unit) {
         thread {
             Thread.sleep(5000)
-            handler.post { callback.invoke("Moscow") }
+            runOnUiThread { callback.invoke("Moscow") }
         }
     }
 
     private fun getTemperature(callback: (Int) -> Unit) {
         thread{
-            handler.post {
+            runOnUiThread {
                 Toast.makeText(this@MainActivity, "Start temperature loading!", Toast.LENGTH_SHORT).show()
             }
             Thread.sleep(5000)
-            handler.post { callback.invoke(17) }
+
+            runOnUiThread { callback.invoke(17) }
         }
     }
 }
