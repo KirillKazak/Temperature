@@ -2,11 +2,8 @@ package kazak.kirill.temperature
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import kazak.kirill.temperature.databinding.ActivityMainBinding
 import kotlin.concurrent.thread
 
